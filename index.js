@@ -42,10 +42,9 @@ async function simpleHttpGet(url) {
 // 7. Function to parse HTML using Cheerio
 function parseHtml(htmlContent) {
   const $ = cheerio.load(htmlContent);
-  $("script").remove();
-  $("style").remove();
-  $("nav").remove();
-  $("footer").remove();
+  $('script, style, img, nav, footer').remove();
+  let textContent = $('body').text();
+  textContent = textContent.replace(/\n/g, ' ');
   return $("body").text().slice(0, 5000);
 }
 // 8. Setting up server routes
